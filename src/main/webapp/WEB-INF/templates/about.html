@@ -1,0 +1,198 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/main :: head(title='HIS-LPS::About')"></head>
+<body class="skin-blue layout-top-nav layout-boxed">
+
+	<div class="wrapper">
+		<div th:replace="layout/main :: header('about')"></div>
+
+		<!-- Full Width Column -->
+		<div class="content-wrapper">
+
+			<!-- Content Header (Page header) -->
+			<section class="content-header"
+				th:insert="layout/main :: breadcrumb(~{ :: .breadcrumb})">
+				<ol class="breadcrumb">
+					<li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li class="active">About</li>
+				</ol>
+			</section>
+
+
+
+
+			<!-- Main content -->
+			<section class="content">
+
+				<div class="callout callout-info">
+					<h4>HIS Load Profiler</h4>
+
+					<p>Project Description go here ....</p>
+				</div>
+
+				<h2 class="page-header">Project Team</h2>
+
+				<div class="row">
+					<!-- /.col  Alabbas Alhaj Ali-->
+					<div class="col-md-4">
+						<!-- Widget: user widget style 1 -->
+						<div class="box box-widget widget-user">
+							<!-- Add the bg color to the header using any of the bg-* classes -->
+							<div class="widget-user-header bg-black"
+								style="background: url('/img/photo1.jpg') center center;">
+								<h3 class="widget-user-username">Alabbas Alhaj Ali</h3>
+								<h5 class="widget-user-desc">Software Developer</h5>
+							</div>
+							<div class="widget-user-image">
+								<img src="../../img/user1-128x128.jpg"
+									alt="User Avatar">
+							</div>
+							<div class="box-footer">
+								<div class="row">
+									<div class="col-sm-4 border-right">
+										<div class="description-block">
+											<h5 class="description-header">56</h5>
+											<span class="description-text">TASKS</span>
+										</div>
+										<!-- /.description-block -->
+									</div>
+									<!-- /.col -->
+									<div class="col-sm-4 border-right">
+										<div class="description-block">
+											<h5 class="description-header">7</h5>
+											<span class="description-text">COMPLETED PRODUCTS</span>
+										</div>
+										<!-- /.description-block -->
+									</div>
+									<!-- /.col -->
+									<div class="col-sm-4">
+										<div class="description-block">
+											<h5 class="description-header">35</h5>
+											<span class="description-text">PRODUCTS</span>
+										</div>
+										<!-- /.description-block -->
+									</div>
+									<!-- /.col -->
+								</div>
+								<!-- /.row -->
+							</div>
+						</div>
+						<!-- /.widget-user -->
+					</div>
+					<!-- /.col -->
+
+
+
+					<!-- /.col  Parch-->
+					<div class="col-md-4">
+						<!-- Widget: user widget style 1 -->
+						<div class="box box-widget widget-user">
+							<!-- Add the bg color to the header using any of the bg-* classes -->
+							<div class="widget-user-header bg-black"
+								style="background: url([[@{/img/photo2.jpg}}]]) center center;">
+								<h3 class="widget-user-username">Parch ...</h3>
+								<h5 class="widget-user-desc">Data science</h5>
+							</div>
+							<div class="widget-user-image">
+								<img src="../../img/user2-128x128.jpg"
+									alt="User Avatar">
+							</div>
+							<div class="box-footer">
+								<div class="row">
+									<div class="col-sm-4 border-right">
+										<div class="description-block">
+											<h5 class="description-header">3</h5>
+											<span class="description-text">TASKS</span>
+										</div>
+										<!-- /.description-block -->
+									</div>
+									<!-- /.col -->
+									<div class="col-sm-4 border-right">
+										<div class="description-block">
+											<h5 class="description-header">7</h5>
+											<span class="description-text">COMPLETED PRODUCTS</span>
+										</div>
+										<!-- /.description-block -->
+									</div>
+									<!-- /.col -->
+									<div class="col-sm-4">
+										<div class="description-block">
+											<h5 class="description-header">35</h5>
+											<span class="description-text">PRODUCTS</span>
+										</div>
+										<!-- /.description-block -->
+									</div>
+									<!-- /.col -->
+								</div>
+								<!-- /.row -->
+							</div>
+						</div>
+						<!-- /.widget-user -->
+					</div>
+					<!-- /.col -->
+
+
+
+
+					<!-- /.col  Alabbas Alhaj Ali-->
+					<div class="col-md-4">
+						<!-- Widget: user widget style 1 -->
+						<div class="box box-widget widget-user">
+							<!-- Add the bg color to the header using any of the bg-* classes -->
+							<div class="widget-user-header bg-black"
+								style="background: url('../../img/photo3.jpg') center center;">
+								<h3 class="widget-user-username">Sreahtha Roy</h3>
+								<h5 class="widget-user-desc">....</h5>
+							</div>
+							<div class="widget-user-image">
+								<img src="../../img/user3-128x128.jpg"
+									alt="User Avatar">
+							</div>
+							<div class="box-footer">
+								<div class="row">
+									<div class="col-sm-4 border-right">
+										<div class="description-block">
+											<h5 class="description-header">3</h5>
+											<span class="description-text">TASKS</span>
+										</div>
+										<!-- /.description-block -->
+									</div>
+									<!-- /.col -->
+									<div class="col-sm-4 border-right">
+										<div class="description-block">
+											<h5 class="description-header">7</h5>
+											<span class="description-text">COMPLETED PRODUCTS</span>
+										</div>
+										<!-- /.description-block -->
+									</div>
+									<!-- /.col -->
+									<div class="col-sm-4">
+										<div class="description-block">
+											<h5 class="description-header">35</h5>
+											<span class="description-text">PRODUCTS</span>
+										</div>
+										<!-- /.description-block -->
+									</div>
+									<!-- /.col -->
+								</div>
+								<!-- /.row -->
+							</div>
+						</div>
+						<!-- /.widget-user -->
+					</div>
+					<!-- /.col -->
+
+				</div>
+
+			</section>
+		</div>
+		<!-- end container -->
+
+		<!-- Main Footer -->
+		<div th:replace="layout/main :: footer"></div>
+	</div>
+
+</body>
+</html>
+

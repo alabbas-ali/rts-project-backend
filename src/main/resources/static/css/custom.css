@@ -1,0 +1,17 @@
+.content-error {
+	position: relative;
+	padding: 15px 15px 0 15px;
+}
+
+.content-processbar {
+	position: relative;
+	padding: 15px 15px 0 15px;
+}
+
+.widget-user .box-footer {
+	padding-top: 51px;
+}
+
+.layout-boxed {
+	background-size: 175px 80px;
+}
