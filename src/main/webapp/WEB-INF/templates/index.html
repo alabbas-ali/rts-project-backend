@@ -33,26 +33,10 @@
 			<!-- Main content -->
 			<section class="content"
 				th:insert="layout/main :: box('Please Set Your Simulation Configuration', ~{ :: #box-body})">
-
 				<div class="box-body" id="box-body">
-					
-				</div>
 
-			</section>
-
-			<section class="content" id="contentprocessbar" style="display: none">
-				<div class="box">
-					<div class="box-header">
-						<i class="fa fa-heartbeat"></i>
-						<h3 class="box-title">Simulation Run Progress</h3>
-					</div>
-					<div class="box-body">
-						<div class="row">
-							<div id="processbarContainer"
-								class="processbar-container col-lg-12"></div>
-						</div>
-					</div>
-
+					<div id="chart"></div>
+				
 				</div>
 			</section>
 

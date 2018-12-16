@@ -114,15 +114,22 @@
 			<script type="text/javascript" 
 				src="../../js/main.js"
 				th:src="@{/js/app.js}"></script>
+
+			<!-- Bi-directional hierarchical sankey diagram  http://bl.ocks.org/Neilos/584b9a5d44d5fe00f779 -->
+			<script src="http://d3js.org/d3.v3.min.js"></script>
+			<script src="https://cdn.rawgit.com/Neilos/bihisankey/master/bihisankey.js"></script>
+			
+			<script type="text/javascript" 
+				src="../../js/main.js"
+				th:src="@{/js/diagram.js}"></script>
 				
-
+			<!-- sock js -->
 			<script src="//cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
-
 			<script
 				src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-
 			<script type="text/javascript" th:src="@{/js/wepSockJS.js}"
 				src="../../js/wepSockJS.js"></script>
+			
 		</footer>
 	</div>
 
