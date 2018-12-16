@@ -1,11 +1,13 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout/main :: head(title='HIS-LPS::Home')"></head>
+<head th:replace="layout/main :: head(title='HIS-RTS::Home')">
+	<title> Home Page </title>
+</head>
 <body class="skin-blue layout-top-nav layout-boxed">
 
 	<div class="wrapper">
-		<div th:replace="layout/main :: header('home')"></div>
+		<div th:replace="layout/main :: header('Home')"></div>
 
 		<!-- Full Width Column -->
 		<div class="content-wrapper">
@@ -13,7 +15,8 @@
 
 			<!-- Content Header (Page header) -->
 			<section class="content-header"
-				th:insert="layout/main :: breadcrumb(~{ :: .breadcrumb})">
+				th:insert="layout/main :: breadcrumb(~{ :: .breadcrumb_title}, ~{ :: .breadcrumb})">
+				<h1 class="breadcrumb_title"> HIS-RTS::Home </h1>
 				<ol class="breadcrumb">
 					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 					<li class="active">Dashboard</li>
@@ -29,7 +32,7 @@
 
 			<!-- Main content -->
 			<section class="content"
-				th:insert="layout/main :: box( 'Please Set Your Simulation Configuration', ~{ :: #box-body})">
+				th:insert="layout/main :: box('Please Set Your Simulation Configuration', ~{ :: #box-body})">
 
 				<div class="box-body" id="box-body">
 					

@@ -39,8 +39,8 @@
   
 </head>
 <body>
-
 	<div class="wrapper">
+
 		<header class="main-header" th:fragment="header(module)">
 			<nav class="navbar navbar-static-top navbar-inverse">
 				<div class="container-fluid">
@@ -65,14 +65,12 @@
 			</nav>
 		</header>
 
-
 		<!-- Full Width Column -->
 		<div class="content-wrapper">
+
 			<!-- Content Header (Page header) -->
-			<section th:fragment="breadcrumb(breadcrumb)" class="content-header">
-				<h1>
-					Top Navigation <small>Example 2.0</small>
-				</h1>
+			<section th:fragment="breadcrumb(title, breadcrumb)" class="content-header">
+				<h1 th:replace="${title}"> </h1>
 				<ol class="breadcrumb" th:replace="${breadcrumb}">
 					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 					<li class="active">Dashboard</li>
@@ -92,8 +90,8 @@
 						</div>
 					</div>
 				</div>
-
 			</section>
+
 		</div>
 
 		<!-- Main Footer -->
