@@ -1,7 +1,5 @@
 package his.railway.rts;
 
-
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,10 +11,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-
 @SpringBootApplication
 @Configuration
-@EnableAutoConfiguration 
+@EnableAutoConfiguration
 @ComponentScan
 @EnableAsync
 public class WebApplication extends SpringBootServletInitializer {
@@ -38,6 +35,4 @@ public class WebApplication extends SpringBootServletInitializer {
 		executor.setQueueCapacity(25);
 		return executor;
 	}
-	
 }
-

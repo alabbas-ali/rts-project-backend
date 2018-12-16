@@ -79,13 +79,13 @@ function connect(){
         stompClient.subscribe('/simulation/sim-status', function(messageOutput) {
             //console.log("New Message: " + messageOutput);
             var messageObject = $.parseJSON(messageOutput.body);
-            update(messageObject);
+            updateMessage(messageObject);
         });
     
     });
 }
 
-function update(newMessage)
+function updateMessage(newMessage)
 {
 	var rows = $('#processbarContainer').find('#'+newMessage.jobName);
 	if(rows.length === 0){
