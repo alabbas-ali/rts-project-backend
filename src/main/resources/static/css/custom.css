@@ -13,7 +13,8 @@
 }
 
 .layout-boxed {
-  background-size: 175px 80px;
+  background-size: 175px 80px !important;
+  background: url('../img/boxed-bg.jpg') repeat fixed;
 }
 
 
