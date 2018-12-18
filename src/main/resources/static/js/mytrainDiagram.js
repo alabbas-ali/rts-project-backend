@@ -35,6 +35,7 @@ const convertLinksToPostions = (network) => {
 
 /*  Constants Decleration Section
 *************************************************************/
+
 const PARENT_TAG_ID = "#chart",
     ZUME = 25,
     OPACITY = {
@@ -45,14 +46,8 @@ const PARENT_TAG_ID = "#chart",
         LINK_FADED: 0.05,
         LINK_HIGHLIGHT: 0.9
     },
-    TYPES = ["gate", "connectionGate", "switch", "station", "sensor"],
-    TYPES_RADIUS= {
-        gate: 3,
-        connectionGate: 6,
-        switch: 2,
-        station:7,
-        sensor: 1,
-    },
+    TYPES = ['GATE', 'CONNECTION_GATE', 'STASTION', 'SWITCH', 'SENSOR'],
+    TYPES_RADIUS= { 'GATE' : 3, 'CONNECTION_GATE': 6, 'STASTION': 2, 'SWITCH':7, 'SENSOR': 1},
     TYPE_COLORS = ["#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e"],
     TYPE_HIGHLIGHT_COLORS = ["#66c2a5", "#fc8d62", "#8da0cb", "#e78ac3", "#a6d854"],
     LINK_COLOR = "#b3b3b3",
