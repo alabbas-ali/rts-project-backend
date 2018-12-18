@@ -50,6 +50,14 @@
 			<artifactId>spring-boot-starter-websocket</artifactId>
 		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-commons-core -->
+		<dependency>
+		    <groupId>org.springframework.data</groupId>
+		    <artifactId>spring-data-commons-core</artifactId>
+		    <version>1.4.1.RELEASE</version>
+		</dependency>
+		
+		
 		<dependency>
 			<groupId>org.thymeleaf</groupId>
 			<artifactId>thymeleaf-spring4</artifactId>
