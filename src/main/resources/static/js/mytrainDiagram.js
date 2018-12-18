@@ -36,6 +36,7 @@ const convertLinksToPostions = (network) => {
 /*  Constants Decleration Section
 *************************************************************/
 const PARENT_TAG_ID = "#chart",
+    ZUME = 35,
     OPACITY = {
         NODE_DEFAULT: 0.9,
         NODE_FADED: 0.1,
@@ -45,6 +46,13 @@ const PARENT_TAG_ID = "#chart",
         LINK_HIGHLIGHT: 0.9
     },
     TYPES = ["gate", "connectionGate", "switch", "station", "sensor"],
+    TYPES_RADIUS= {
+        gate: 3,
+        connectionGate: 6,
+        switch: 2,
+        station:7,
+        sensor: 1,
+    },
     TYPE_COLORS = ["#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e"],
     TYPE_HIGHLIGHT_COLORS = ["#66c2a5", "#fc8d62", "#8da0cb", "#e78ac3", "#a6d854"],
     LINK_COLOR = "#b3b3b3",
@@ -84,6 +92,7 @@ const createMap = (parentTagID) => {
 /*  Create NetWork on the Map
 *************************************************************/
 const renderMap = (mapSvgContainer, network) => {
+
     const stations = mapSvgContainer.selectAll('.station')
         .data(network.nodes, d => d.name)
 
@@ -93,41 +102,43 @@ const renderMap = (mapSvgContainer, network) => {
     connections.enter()
         .append('line')
         .attr('class', d => 'connect ' + d.line + '-dimmable')
-        .attr('x1', d => d.source.x * 30)
-        .attr('y1', d => d.source.y * 30)
-        .attr('x2', d => d.target.x * 30)
-        .attr('y2', d => d.target.y * 30)
+        .attr('x1', d => d.source.x * ZUME)
+        .attr('y1', d => d.source.y * ZUME)
+        .attr('x2', d => d.target.x * ZUME)
+        .attr('y2', d => d.target.y * ZUME)
+
+    // connections.enter()
+    //     .append('text')
+    //     .attr('x', d => (d.source.x * ZUME + d.target.x * ZUME)/2)
+    //     .attr('y', d => (d.source.y * ZUME + d.target.y * ZUME)/2)
+    //     .attr('text-anchor', 'middle')
+    //     .attr('class', 'connect label')
+    //     .text(d=> d.source.nodeID + '-' + d.target.nodeID)
     
     stations.enter()
         .append('circle')
         .attr('class', d => 'station middle station-label ' + d.id + ' ' + d.type)
-        .attr('cx', d =>  d.x * 30)
-        .attr('cy', d =>  d.y * 30)
-        .attr('r', 3)
+        .attr('cx', d =>  d.x * ZUME)
+        .attr('cy', d =>  d.y * ZUME)
+        .attr('r', d => TYPES_RADIUS[d.type])
         .style("fill", d => {
             d.color = colorScale(d.type.replace(/ .*/, ""))
             return d.color
         })
         .style("stroke", d => d3.rgb(colorScale(d.type.replace(/ .*/, ""))).darker(0.1))
         .on('mouseover', d => {
-            const xPosition = parseFloat(d.x * 30)
-			const yPosition = parseFloat(d.y * 30 + 50)
+            const xPosition = parseFloat(d.x * ZUME)
+			const yPosition = parseFloat(d.y * ZUME + 50)
             d3.select("#tooltip")
 				.style("left", xPosition + "px")
 				.style("top", yPosition + "px")
 				.select("#value")
-                .text(d.name)
+                .text(d.name + ' ' + d.id)
             d3.select("#tooltip").classed("hidden", false)
         })
         .on('mouseout', _d => {
             d3.select("#tooltip").classed("hidden", true)
         })
-
-    stations
-        .attr('cx', d => d.x * 30)
-        .attr('cy', d => d.y * 30)
-        .attr('r', 3)
-
 }
 
 /* Update Function When there are new Data
