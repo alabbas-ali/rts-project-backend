@@ -99,13 +99,13 @@
         {"source": 42, "target": 43, "line": "orange" },
         {"source": 43, "target": 9, "line": "red" },
 
-        {"source": 9, "target": 44, "line": "red" },
-        {"source": 44, "target": 45, "line": "red" },
-        {"source": 45, "target": 46, "line": "red" },
-        {"source": 46, "target": 47, "line": "red" },
-        {"source": 47, "target": 48, "line": "red" },
-        {"source": 48, "target": 49, "line": "red" },
-        {"source": 49, "target": 50, "line": "red" },
-        {"source": 50, "target": 51, "line": "red" }
+        {"source": 9, "target": 44, "line": "green" },
+        {"source": 44, "target": 45, "line": "green" },
+        {"source": 45, "target": 46, "line": "green" },
+        {"source": 46, "target": 47, "line": "green" },
+        {"source": 47, "target": 48, "line": "green" },
+        {"source": 48, "target": 49, "line": "green" },
+        {"source": 49, "target": 50, "line": "green" },
+        {"source": 50, "target": 51, "line": "green" }
     ]
 }

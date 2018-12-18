@@ -1,19 +1,19 @@
 .content-error {
-	position: relative;
-	padding: 15px 15px 0 15px;
+  position: relative;
+  padding: 15px 15px 0 15px;
 }
 
 .content-processbar {
-	position: relative;
-	padding: 15px 15px 0 15px;
+  position: relative;
+  padding: 15px 15px 0 15px;
 }
 
 .widget-user .box-footer {
-	padding-top: 51px;
+  padding-top: 51px;
 }
 
 .layout-boxed {
-	background-size: 175px 80px;
+  background-size: 175px 80px;
 }
 
 
@@ -38,16 +38,30 @@
 }
 
 .connect path:hover {
-    stroke-width: 1px!important
+  stroke-width: 1px !important
 }
- 
+
 .connect {
-    stroke-width: .5px;
-    stroke: #ccc
+  stroke-width: .7px;
+  stroke: #ccc
+}
+
+.connect.red-dimmable {
+  stroke-width: .7px;
+  stroke: #e70a0a
+}
+
+.connect.orange-dimmable {
+  stroke-width: .7px;
+  stroke: #ff8904
+}
+
+.connect.green-dimmable {
+  stroke-width: .7px;
+  stroke: #019d10
 }
 
 .active.connect {
-    stroke-width: 1.5px;
-    stroke: #5cb85c
+  stroke-width: 1.5px;
+  stroke: #5cb85c
 }
-

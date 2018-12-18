@@ -36,7 +36,7 @@ const convertLinksToPostions = (network) => {
 /*  Constants Decleration Section
 *************************************************************/
 const PARENT_TAG_ID = "#chart",
-    ZUME = 35,
+    ZUME = 25,
     OPACITY = {
         NODE_DEFAULT: 0.9,
         NODE_FADED: 0.1,
@@ -128,7 +128,7 @@ const renderMap = (mapSvgContainer, network) => {
         .style("stroke", d => d3.rgb(colorScale(d.type.replace(/ .*/, ""))).darker(0.1))
         .on('mouseover', d => {
             const xPosition = parseFloat(d.x * ZUME)
-			const yPosition = parseFloat(d.y * ZUME + 50)
+			const yPosition = parseFloat(d.y * ZUME + 80)
             d3.select("#tooltip")
 				.style("left", xPosition + "px")
 				.style("top", yPosition + "px")
