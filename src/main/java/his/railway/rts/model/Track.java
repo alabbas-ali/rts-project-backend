@@ -48,5 +48,30 @@ public class Track {
 		this.status = status;
 	}
 	
-	
+	@Override
+	public int hashCode() {
+		int result = 17;
+		result = 31 * result + this.source.hashCode();
+		result = 31 * result + this.target.hashCode();
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == this) return true;
+		if (!(obj instanceof Track)) {
+            return false;
+        }
+		Track n = (Track) obj;
+		return n.getSource().equals(this.source) &&
+				n.getTarget().equals(this.target);
+	}
+
+	@Override
+	public String toString() {
+		return "{ source: " + this.source  + 
+				", target: " + this.target + 
+				", status: " + this.status + 
+				"}";
+	}
 }
