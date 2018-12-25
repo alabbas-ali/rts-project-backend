@@ -47,17 +47,17 @@
   stroke: #ccc
 }
 
-.connect.red-dimmable {
+.connect.RED-dimmable {
   stroke-width: .7px;
   stroke: #e70a0a
 }
 
-.connect.orange-dimmable {
+.connect.ORANGE-dimmable {
   stroke-width: .7px;
   stroke: #ff8904
 }
 
-.connect.green-dimmable {
+.connect.GREEN-dimmable {
   stroke-width: .7px;
   stroke: #019d10
 }

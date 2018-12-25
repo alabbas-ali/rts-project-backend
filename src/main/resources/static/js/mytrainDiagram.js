@@ -96,7 +96,7 @@ const renderMap = (mapSvgContainer, network) => {
     
     connections.enter()
         .append('line')
-        .attr('class', d => 'connect ' + d.line + '-dimmable')
+        .attr('class', d => 'connect ' + d.status + '-dimmable')
         .attr('x1', d => d.source.x * ZUME)
         .attr('y1', d => d.source.y * ZUME)
         .attr('x2', d => d.target.x * ZUME)
@@ -153,17 +153,9 @@ const update = (network) => {
 *************************************************************/
 $.getJSON("spider.json", spiders => {
     spider = spiders
-    $.getJSON("stations.json", network => update(network))
+    $.getJSON("/get", data => {
+        if (data.status === 'SUCCESS') {
+            update(data.result)
+        }
+    })
 })
-
-
-
-// const formatNumber = (d) => {
-//     var numberFormat = d3.format(",.0f"); // zero decimal places
-//     return "£" + numberFormat(d);
-// }
-
-// const formatFlow = (d) => {
-//     var flowFormat = d3.format(",.0f"); // zero decimal places with sign
-//     return "£" + flowFormat(Math.abs(d)) + (d < 0 ? " CR" : " DR");
-// }
