@@ -153,8 +153,10 @@ const update = (network) => {
 *************************************************************/
 $.getJSON("spider.json", spiders => {
     spider = spiders
-    $.getJSON("/get", data => {
+    
+    $.getJSON("/railway/status", data => {
         if (data.status === 'SUCCESS') {
+            connect()
             update(data.result)
         }
     })

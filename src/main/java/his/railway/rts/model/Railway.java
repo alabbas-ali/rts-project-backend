@@ -1,5 +1,6 @@
 package his.railway.rts.model;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -7,24 +8,24 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 
 public class Railway {
 	
-	private Set<Node> nodes;
+	private HashSet<Node> nodes;
 	
-	private Set<Track> links;
+	private HashSet<Track> links;
 	
 	public Set<Node> getNodes() {
 		return nodes;
 	}
 	
-	public void setNodes(Set<Node> nodes) {
+	public void setNodes(HashSet<Node> nodes) {
 		this.nodes = nodes;
 	}
 	
 	@JsonGetter(value = "links")
-	public Set<Track> getLinks() {
+	public HashSet<Track> getLinks() {
 		return links;
 	}
 	
-	public void setLinks(Set<Track> links) {
+	public void setLinks(HashSet<Track> links) {
 		this.links = links;
 	}
 	

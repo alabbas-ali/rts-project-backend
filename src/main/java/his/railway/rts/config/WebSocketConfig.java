@@ -12,14 +12,14 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
     
 	@Override
     public void registerStompEndpoints(StompEndpointRegistry stompEndpointRegistry) {
-        stompEndpointRegistry.addEndpoint("/sim-status").withSockJS();
+        stompEndpointRegistry.addEndpoint("/ws").withSockJS();
     }
     
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry)
     {
-        registry.enableSimpleBroker("/simulation");
-        registry.setApplicationDestinationPrefixes("/ws");
+        registry.enableSimpleBroker("/railway");
+        registry.setApplicationDestinationPrefixes("/app");
     }
     
 }
