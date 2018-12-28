@@ -1,10 +1,8 @@
 package his.railway.rts.job;
 
-
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 import his.railway.rts.service.RailwayService;
-
 
 public class JobRunner implements Runnable {
 
@@ -26,7 +24,7 @@ public class JobRunner implements Runnable {
 
 	@Override
 	public void run() {
-		while(true) {
+		while (true) {
 			this.send(railwayService.changeRandomLineState());
 			try {
 				Thread.sleep(7000);
@@ -34,7 +32,7 @@ public class JobRunner implements Runnable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		}
 	}
 

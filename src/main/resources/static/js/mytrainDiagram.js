@@ -3,7 +3,7 @@
 let mapSvgContainer, tip
 
 /*  Node Positions Converters
-*************************************************************/
+ *************************************************************/
 let spider = {}
 
 const convertNodesIdToPostion = (network) => {
@@ -15,17 +15,21 @@ const convertNodesIdToPostion = (network) => {
 }
 
 const convertLinksToPostions = (network) => {
-    const links = network.links.filter( link => {
-        const sourceNode = network.nodes.find(it =>  it.id === link.source.toString())
+    const links = network.links.filter(link => {
+        const sourceNode = network.nodes.find(it => it.id === link.source.toString())
         const targetNode = network.nodes.find(it => it.id === link.target.toString())
         return sourceNode && targetNode
     }).map(link => {
-        const sourceNode = network.nodes.find(it =>  it.id === link.source.toString())
+        const sourceNode = network.nodes.find(it => it.id === link.source.toString())
         const targetNode = network.nodes.find(it => it.id === link.target.toString())
-        link.source = {'nodeID': link.source }
+        link.source = {
+            'nodeID': link.source
+        }
         link.source.x = sourceNode.x
         link.source.y = sourceNode.y
-        link.target = { 'nodeID': link.target }
+        link.target = {
+            'nodeID': link.target
+        }
         link.target.x = targetNode.x
         link.target.y = targetNode.y
         return link
@@ -34,7 +38,7 @@ const convertLinksToPostions = (network) => {
 }
 
 /*  Constants Decleration Section
-*************************************************************/
+ *************************************************************/
 
 const PARENT_TAG_ID = "#chart",
     ZUME = 25,
@@ -47,7 +51,13 @@ const PARENT_TAG_ID = "#chart",
         LINK_HIGHLIGHT: 0.9
     },
     TYPES = ['GATE', 'CONNECTION_GATE', 'STASTION', 'SWITCH', 'SENSOR'],
-    TYPES_RADIUS= { 'GATE' : 3, 'CONNECTION_GATE': 6, 'STASTION': 2, 'SWITCH':7, 'SENSOR': 1},
+    TYPES_RADIUS = {
+        'GATE': 3,
+        'CONNECTION_GATE': 6,
+        'STASTION': 2,
+        'SWITCH': 7,
+        'SENSOR': 1
+    },
     TYPE_COLORS = ["#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e"],
     TYPE_HIGHLIGHT_COLORS = ["#66c2a5", "#fc8d62", "#8da0cb", "#e78ac3", "#a6d854"],
     LINK_COLOR = "#b3b3b3",
@@ -72,7 +82,7 @@ const colorScale = d3.scaleOrdinal().domain(TYPES).range(TYPE_COLORS)
 const highlightColorScale = d3.scaleOrdinal().domain(TYPES).range(TYPE_HIGHLIGHT_COLORS)
 
 /*  Create The Map Continer
-*************************************************************/
+ *************************************************************/
 const createMap = (parentTagID) => {
     const width = $(parentTagID).width()
     const height = $(parentTagID).height()
@@ -85,7 +95,7 @@ const createMap = (parentTagID) => {
 }
 
 /*  Create NetWork on the Map
-*************************************************************/
+ *************************************************************/
 const renderMap = (mapSvgContainer, network) => {
 
     const stations = mapSvgContainer.selectAll('.station')
@@ -93,7 +103,7 @@ const renderMap = (mapSvgContainer, network) => {
 
     const connections = mapSvgContainer.selectAll('.connect')
         .data(network.links, d => (d.source && d.source.id) + '-' + (d.target && d.target.id))
-    
+
     connections.enter()
         .append('line')
         .attr('class', d => 'connect ' + d.status + '-dimmable')
@@ -109,12 +119,12 @@ const renderMap = (mapSvgContainer, network) => {
     //     .attr('text-anchor', 'middle')
     //     .attr('class', 'connect label')
     //     .text(d=> d.source.nodeID + '-' + d.target.nodeID)
-    
+
     stations.enter()
         .append('circle')
         .attr('class', d => 'station middle station-label ' + d.id + ' ' + d.type)
-        .attr('cx', d =>  d.x * ZUME)
-        .attr('cy', d =>  d.y * ZUME)
+        .attr('cx', d => d.x * ZUME)
+        .attr('cy', d => d.y * ZUME)
         .attr('r', d => TYPES_RADIUS[d.type])
         .style("fill", d => {
             d.color = colorScale(d.type.replace(/ .*/, ""))
@@ -123,11 +133,11 @@ const renderMap = (mapSvgContainer, network) => {
         .style("stroke", d => d3.rgb(colorScale(d.type.replace(/ .*/, ""))).darker(0.1))
         .on('mouseover', d => {
             const xPosition = parseFloat(d.x * ZUME)
-			const yPosition = parseFloat(d.y * ZUME + 80)
+            const yPosition = parseFloat(d.y * ZUME + 80)
             d3.select("#tooltip")
-				.style("left", xPosition + "px")
-				.style("top", yPosition + "px")
-				.select("#value")
+                .style("left", xPosition + "px")
+                .style("top", yPosition + "px")
+                .select("#value")
                 .text(d.name + ' ' + d.id)
             d3.select("#tooltip").classed("hidden", false)
         })
@@ -137,12 +147,12 @@ const renderMap = (mapSvgContainer, network) => {
 }
 
 /* Update Function When there are new Data
-*************************************************************/
+ *************************************************************/
 const update = (network) => {
-    
+
     if (!mapSvgContainer)
         mapSvgContainer = createMap(PARENT_TAG_ID)
-    
+
     network.nodes = convertNodesIdToPostion(network)
     network.links = convertLinksToPostions(network)
 
@@ -150,10 +160,10 @@ const update = (network) => {
 }
 
 /* 1. Load and pre-process the data
-*************************************************************/
+ *************************************************************/
 $.getJSON("spider.json", spiders => {
     spider = spiders
-    
+
     $.getJSON("/railway/status", data => {
         if (data.status === 'SUCCESS') {
             connect()

@@ -17,10 +17,10 @@ import his.railway.rts.service.RailwayService;
 
 @Controller
 public class IndexController {
-	
+
 	@Autowired
 	private RailwayService railwayService;
-	
+
 	@Autowired
 	private SimpMessagingTemplate template;
 
@@ -28,12 +28,12 @@ public class IndexController {
 	public String index(Map<String, Object> model) {
 		return "index";
 	}
-	
-	@RequestMapping(value = "/railway/status", method= RequestMethod.GET)
+
+	@RequestMapping(value = "/railway/status", method = RequestMethod.GET)
 	@ResponseBody
 	@SendTo("/railway/status")
 	public JsonResponseBody fetchStatus() {
-		JobRunner job = new JobRunner(railwayService , template);
+		JobRunner job = new JobRunner(railwayService, template);
 		Thread thread = new Thread(job);
 		thread.start();
 		JsonResponseBody response = new JsonResponseBody();
@@ -41,5 +41,5 @@ public class IndexController {
 		response.setStatus(HttpResponceStatus.SUCCESS);
 		return response;
 	}
-	
+
 }

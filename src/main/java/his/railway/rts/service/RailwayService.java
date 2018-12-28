@@ -10,7 +10,7 @@ import his.railway.rts.model.TrackStatus;
 import his.railway.rts.reader.RailwayReader;
 
 public class RailwayService {
-	
+
 	private Railway railway;
 
 	public void load() throws IOException, URISyntaxException {
@@ -27,23 +27,23 @@ public class RailwayService {
 		int size = this.railway.getLinks().size();
 		int item = new Random().nextInt(size);
 		int i = 0;
-		for(Track track : this.railway.getLinks()) {
-		    if (i == item) {
-		    	//System.out.println(" The Random chosen Track is : " + track);
+		for (Track track : this.railway.getLinks()) {
+			if (i == item) {
+				// System.out.println(" The Random chosen Track is : " + track);
 				track.setStatus(TrackStatus.randomTrackStatus());
 				this.saveTrack(track);
-		    	return track;
-		    }
-		    i++;
+				return track;
+			}
+			i++;
 		}
 		return null;
 	}
 
 	private void saveTrack(Track track) {
-		if(!this.railway.getLinks().add(track)) {
+		if (!this.railway.getLinks().add(track)) {
 			this.railway.getLinks().remove(track);
 			this.railway.getLinks().add(track);
 		}
 	}
-	
+
 }
