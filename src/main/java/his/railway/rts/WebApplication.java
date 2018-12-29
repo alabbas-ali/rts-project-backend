@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.scheduling.annotation.EnableAsync;
 
+
 import his.railway.rts.service.RailwayService;
 
 @SpringBootApplication
@@ -30,7 +31,7 @@ public class WebApplication extends SpringBootServletInitializer {
 		SpringApplication.run(WebApplication.class, args);
 	}
 
-	@Bean("railwayService")
+	@Bean
 	@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 	public RailwayService getAccountService() {
 		RailwayService railwayService = new RailwayService();
@@ -42,5 +43,13 @@ public class WebApplication extends SpringBootServletInitializer {
 		} 
 		return railwayService;
 	}
+	
+//	@Bean
+//	@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
+//	public ArduinoReadeWriteService getArduinoReadeWriteService() {
+//		ArduinoReadeWriteService arduino = new ArduinoReadeWriteService();
+//		arduino.initialize();
+//		return arduino;
+//	}
 
 }

@@ -23,6 +23,9 @@ public class IndexController {
 
 	@Autowired
 	private SimpMessagingTemplate template;
+	
+	//@Autowired
+	//private ArduinoReadeWriteService arduino;
 
 	@RequestMapping("/")
 	public String index(Map<String, Object> model) {

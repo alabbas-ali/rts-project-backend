@@ -165,7 +165,7 @@ const updateCircle = (node) => {
             d.color = colorScale(node.type.replace(/ .*/, ""))
             return d.color
         })
-        .style("stroke", d => d3.rgb(colorScale(node.type.replace(/ .*/, ""))).darker(0.1))
+        .style("stroke", _d => d3.rgb(colorScale(node.type.replace(/ .*/, ""))).darker(0.1))
 }
 
 const updateLine = (node) => {

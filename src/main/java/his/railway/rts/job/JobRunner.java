@@ -2,6 +2,7 @@ package his.railway.rts.job;
 
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 
+import his.railway.rts.service.ArduinoReadeWriteService;
 import his.railway.rts.service.RailwayService;
 
 public class JobRunner implements Runnable {
@@ -24,6 +25,9 @@ public class JobRunner implements Runnable {
 
 	@Override
 	public void run() {
+		ArduinoReadeWriteService arduino = new ArduinoReadeWriteService();
+		arduino.initialize();
+		//return arduino;
 		while (true) {
 			this.send(railwayService.changeRandomLineState());
 			try {
