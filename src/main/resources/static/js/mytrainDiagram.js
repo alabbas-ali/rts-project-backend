@@ -107,6 +107,8 @@ const renderMap = (mapSvgContainer, network) => {
     connections.enter()
         .append('line')
         .attr('class', d => 'connect ' + d.status + '-dimmable')
+        .attr('source', d => d.source.nodeID)
+        .attr('target', d => d.target.nodeID)
         .attr('x1', d => d.source.x * ZUME)
         .attr('y1', d => d.source.y * ZUME)
         .attr('x2', d => d.target.x * ZUME)
@@ -123,6 +125,7 @@ const renderMap = (mapSvgContainer, network) => {
     stations.enter()
         .append('circle')
         .attr('class', d => 'station middle station-label ' + d.id + ' ' + d.type)
+        .attr('id', d => d.id)
         .attr('cx', d => d.x * ZUME)
         .attr('cy', d => d.y * ZUME)
         .attr('r', d => TYPES_RADIUS[d.type])
@@ -148,7 +151,32 @@ const renderMap = (mapSvgContainer, network) => {
 
 /* Update Function When there are new Data
  *************************************************************/
-const update = (network) => {
+const update = (node) => {
+    if (node.id) 
+        updateCircle(node)
+    else
+        updateLine(node)
+}
+
+const updateCircle = (node) => {
+    //console.log("Change Circle {" + node.id + "," + node.type  + "," + node.name + "," + "}")
+    mapSvgContainer.select("circle[id='" + node.id + "']")
+        .style("fill", d => {
+            d.color = colorScale(node.type.replace(/ .*/, ""))
+            return d.color
+        })
+        .style("stroke", d => d3.rgb(colorScale(node.type.replace(/ .*/, ""))).darker(0.1))
+}
+
+const updateLine = (node) => {
+    //console.log("Change Line {" + node.source + "," + node.target  + "," + node.status + "," + "}")
+    mapSvgContainer.select("line[source='" + node.source + "'][target='" + node.target + "']")
+        .attr('class', 'connect ' + node.status + '-dimmable')
+}
+ 
+/* Render Function When there are Network Data
+ *************************************************************/
+const render = (network) => {
 
     if (!mapSvgContainer)
         mapSvgContainer = createMap(PARENT_TAG_ID)
@@ -167,7 +195,7 @@ $.getJSON("spider.json", spiders => {
     $.getJSON("/railway/status", data => {
         if (data.status === 'SUCCESS') {
             connect()
-            update(data.result)
+            render(data.result)
         }
     })
 })

@@ -8,7 +8,7 @@ const connect = () => {
 	stompClient.connect({}, (frame) => {
 		console.log('Connected: ' + frame)
 		stompClient.subscribe('/railway/status', (messageOutput) => {
-			updateMessage(JSON.parse(messageOutput.body))
+			update(JSON.parse(messageOutput.body))
 		})
 	})
 }
@@ -18,8 +18,4 @@ const disconnect = () => {
 		stompClient.disconnect()
 	}
 	console.log("Disconnected")
-}
-
-const updateMessage = (newMessage) => {
-	console.log("New Message: " + newMessage)
 }
