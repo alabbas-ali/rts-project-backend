@@ -10,9 +10,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.EnableAsync;
 
-
+import his.railway.rts.listener.ArduinoReaderListener;
+import his.railway.rts.service.ArduinoReadeWriteService;
 import his.railway.rts.service.RailwayService;
 
 @SpringBootApplication
@@ -44,12 +46,16 @@ public class WebApplication extends SpringBootServletInitializer {
 		return railwayService;
 	}
 	
-//	@Bean
-//	@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
-//	public ArduinoReadeWriteService getArduinoReadeWriteService() {
-//		ArduinoReadeWriteService arduino = new ArduinoReadeWriteService();
-//		arduino.initialize();
-//		return arduino;
-//	}
+	@Bean
+	@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
+	public ArduinoReadeWriteService getArduinoReadeWriteService(
+		RailwayService railwayService,
+		SimpMessagingTemplate template	
+	) {
+		ArduinoReaderListener listener = new ArduinoReaderListener(railwayService, template);
+		ArduinoReadeWriteService arduino = new ArduinoReadeWriteService(listener);
+		arduino.initialize();
+		return arduino;
+	}
 
 }
