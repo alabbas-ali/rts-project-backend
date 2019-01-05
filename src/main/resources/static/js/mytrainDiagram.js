@@ -151,10 +151,11 @@ const renderMap = (mapSvgContainer, network) => {
 
 /* Update Function When there are new Data
  *************************************************************/
-const update = (node) => {
-    if (node.id) 
+const update = (message) => {
+    console.log(message)
+    if (message.id) 
         updateCircle(node)
-    else
+    else (message.target)
         updateLine(node)
 }
 
