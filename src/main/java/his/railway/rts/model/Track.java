@@ -13,6 +13,9 @@ public class Track {
 	@NotNull(message = "Track status can't empty!")
 	private TrackStatus status;
 	
+	@NotNull(message = "Track direction can't empty!")
+	private int direction;
+	
 	public Track() {
 		
 	}
@@ -48,11 +51,20 @@ public class Track {
 		this.status = status;
 	}
 	
+	public int getDirection() {
+		return direction;
+	}
+
+	public void setDirection(int direction) {
+		this.direction = direction;
+	}
+
 	@Override
 	public int hashCode() {
 		int result = 17;
 		result = 31 * result + this.source.hashCode();
 		result = 31 * result + this.target.hashCode();
+		result = 31 * result + this.direction;
 		return result;
 	}
 
@@ -64,14 +76,16 @@ public class Track {
         }
 		Track n = (Track) obj;
 		return n.getSource().equals(this.source) &&
-				n.getTarget().equals(this.target);
+				n.getTarget().equals(this.target) &&
+				n.getDirection() == this.direction;
 	}
 
 	@Override
 	public String toString() {
 		return "{ source: " + this.source  + 
 				", target: " + this.target + 
-				", status: " + this.status + 
+				", direction:" + this.direction +
+				", status: " + this.status +
 				"}";
 	}
 }
