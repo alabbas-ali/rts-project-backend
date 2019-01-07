@@ -7,9 +7,11 @@ import java.io.OutputStream;
 import java.util.Enumeration;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
+import gnu.io.SerialPortEvent;
+import gnu.io.SerialPortEventListener;
 import his.railway.rts.listener.ArduinoReaderListener;
 
-public class ArduinoReadeWriteService {
+public class ArduinoReadeWriteService implements SerialPortEventListener {
 
 	/** The port we're normally going to use. */
 	private static final String PORT_NAMES[] = { //
@@ -24,6 +26,13 @@ public class ArduinoReadeWriteService {
 	/** Default bits per second for COM port. */
 	private static final int DATA_RATE = 9600;
 
+	
+	/**
+	 * A BufferedReader which will be fed by a InputStreamReader converting the
+	 * bytes into characters making the displayed results codepage independent
+	 */
+	private BufferedReader input;
+	
 	/** The output stream to the port */
 	private OutputStream output;
 
@@ -77,11 +86,10 @@ public class ArduinoReadeWriteService {
 
 			// open the streams
 			output = serialPort.getOutputStream();
-			BufferedReader input = new BufferedReader(new InputStreamReader(serialPort.getInputStream()));
-			this.serialPortEventListener.setBufferedReader(input);
+			input = new BufferedReader(new InputStreamReader(serialPort.getInputStream()));
 
 			// add event listeners
-			serialPort.addEventListener(this.serialPortEventListener);
+			serialPort.addEventListener(this);
 			serialPort.notifyOnDataAvailable(true);
 		} catch (Exception e) {
 			System.err.println(e.toString());
@@ -101,6 +109,23 @@ public class ArduinoReadeWriteService {
 
 	public synchronized void writeMessage(String message) throws IOException {
 		output.write(message.getBytes());
+	}
+	
+	/**
+	 * Handle an event on the serial port. Read the data and print it.
+	 */
+	public synchronized void serialEvent(SerialPortEvent event) {
+
+		if (event.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
+			try {
+				String inputLine = input.readLine();
+				System.out.println(inputLine);
+				this.serialPortEventListener.send(inputLine);
+			} catch (Exception e) {
+				System.err.println(e.toString());
+			}
+		}
+		// Ignore all the other eventTypes, but you should consider the other ones.
 	}
 
 }
