@@ -23,12 +23,14 @@ const convertLinksToPostions = (network) => {
         const sourceNode = network.nodes.find(it => it.id === link.source.toString())
         const targetNode = network.nodes.find(it => it.id === link.target.toString())
         link.source = {
-            'nodeID': link.source
+            'nodeID': link.source,
+            'type' : sourceNode.type
         }
         link.source.x = sourceNode.x
         link.source.y = sourceNode.y
         link.target = {
-            'nodeID': link.target
+            'nodeID': link.target,
+            'type' : targetNode.type
         }
         link.target.x = targetNode.x
         link.target.y = targetNode.y
@@ -41,7 +43,7 @@ const convertLinksToPostions = (network) => {
  *************************************************************/
 
 const PARENT_TAG_ID = "#chart",
-    ZUME = 25,
+    ZUME = 30,
     OPACITY = {
         NODE_DEFAULT: 0.9,
         NODE_FADED: 0.1,
@@ -50,16 +52,14 @@ const PARENT_TAG_ID = "#chart",
         LINK_FADED: 0.05,
         LINK_HIGHLIGHT: 0.9
     },
-    TYPES = ['GATE', 'CONNECTION_GATE', 'STASTION', 'SWITCH', 'SENSOR'],
+    TYPES = ['GATE', 'CONNECTION_GATE', 'STASTION', ],
     TYPES_RADIUS = {
         'GATE': 3,
         'CONNECTION_GATE': 6,
-        'STASTION': 2,
-        'SWITCH': 7,
-        'SENSOR': 1
+        'STASTION': 2
     },
-    TYPE_COLORS = ["#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e"],
-    TYPE_HIGHLIGHT_COLORS = ["#66c2a5", "#fc8d62", "#8da0cb", "#e78ac3", "#a6d854"],
+    TYPE_COLORS = ["#1b9e77", "#d95f02", "#7570b3"],
+    TYPE_HIGHLIGHT_COLORS = ["#66c2a5", "#fc8d62", "#8da0cb"],
     LINK_COLOR = "#b3b3b3",
     INFLOW_COLOR = "#2E86D1",
     OUTFLOW_COLOR = "#D63028",
@@ -98,7 +98,7 @@ const createMap = (parentTagID) => {
  *************************************************************/
 const renderMap = (mapSvgContainer, network) => {
 
-    const stations = mapSvgContainer.selectAll('.station')
+    const nodes = mapSvgContainer.selectAll('.station')
         .data(network.nodes, d => d.name)
 
     const connections = mapSvgContainer.selectAll('.connect')
@@ -110,9 +110,15 @@ const renderMap = (mapSvgContainer, network) => {
         .attr('source', d => d.source.nodeID)
         .attr('target', d => d.target.nodeID)
         .attr('x1', d => d.source.x * ZUME)
-        .attr('y1', d => d.source.y * ZUME)
+        .attr('y1', d => {
+            const num = d.source.type === 'STASTION' && d.direction === 2 ? 0.5 : 0
+            return (d.source.y + num) * ZUME
+        })
         .attr('x2', d => d.target.x * ZUME)
-        .attr('y2', d => d.target.y * ZUME)
+        .attr('y2', d => {
+            const num = d.target.type === 'STASTION' && d.direction === 2 ? 0.5 : 0
+            return (d.target.y + num) * ZUME
+        })
 
     // connections.enter()
     //     .append('text')
@@ -122,41 +128,72 @@ const renderMap = (mapSvgContainer, network) => {
     //     .attr('class', 'connect label')
     //     .text(d=> d.source.nodeID + '-' + d.target.nodeID)
 
-    stations.enter()
-        .append('circle')
-        .attr('class', d => 'station middle station-label ' + d.id + ' ' + d.type)
-        .attr('id', d => d.id)
-        .attr('cx', d => d.x * ZUME)
-        .attr('cy', d => d.y * ZUME)
-        .attr('r', d => TYPES_RADIUS[d.type])
-        .style("fill", d => {
-            d.color = colorScale(d.type.replace(/ .*/, ""))
-            return d.color
-        })
-        .style("stroke", d => d3.rgb(colorScale(d.type.replace(/ .*/, ""))).darker(0.1))
-        .on('mouseover', d => {
-            const xPosition = parseFloat(d.x * ZUME)
-            const yPosition = parseFloat(d.y * ZUME + 80)
-            d3.select("#tooltip")
-                .style("left", xPosition + "px")
-                .style("top", yPosition + "px")
-                .select("#value")
-                .text(d.name + ' ' + d.id)
-            d3.select("#tooltip").classed("hidden", false)
-        })
-        .on('mouseout', _d => {
-            d3.select("#tooltip").classed("hidden", true)
-        })
+    nodes.enter()
+        .append('text')
+        .attr('x', d => (d.x * ZUME))
+        .attr('y', d => (d.y * ZUME - 10))
+        .attr('text-anchor', 'middle')
+        .attr('class', ' label')
+        .text(d => d.name)
+
+    network.nodes.forEach(node => {
+        if (node.type == 'STASTION')
+            mapSvgContainer.append('rect')
+            .attr('class',' middle station-label ' + node.id + ' ' + node.type)
+            .attr('id', node.id)
+            .attr('x', node.x * ZUME)
+            .attr('y', (node.y - 0.2) * ZUME)
+            .attr("width", 15)
+            .attr("height", 28)
+            .style("fill", colorScale(node.type.replace(/ .*/, "")))
+            .style("stroke", d3.rgb(colorScale(node.type.replace(/ .*/, ""))).darker(0.1))
+            .on('mouseover', d => {
+                const xPosition = parseFloat(node.x * ZUME)
+                const yPosition = parseFloat(node.y * ZUME + 80)
+                d3.select("#tooltip")
+                    .style("left", xPosition + "px")
+                    .style("top", yPosition + "px")
+                    .select("#value")
+                    .text(node.name + ' ' + node.id)
+                d3.select("#tooltip").classed("hidden", false)
+            })
+            .on('mouseout', _d => {
+                d3.select("#tooltip").classed("hidden", true)
+            })
+        else
+            mapSvgContainer.append('circle')
+            .attr('class', ' middle station-label ' + node.id + ' ' + node.type)
+            .attr('id', node.id)
+            .attr('cx', node.x * ZUME)
+            .attr('cy', node.y * ZUME)
+            .attr('r', TYPES_RADIUS[node.type])
+            .style("fill", colorScale(node.type.replace(/ .*/, "")))
+            .style("stroke", d3.rgb(colorScale(node.type.replace(/ .*/, ""))).darker(0.1))
+            .on('mouseover', d => {
+                const xPosition = parseFloat(node.x * ZUME)
+                const yPosition = parseFloat(node.y * ZUME + 80)
+                d3.select("#tooltip")
+                    .style("left", xPosition + "px")
+                    .style("top", yPosition + "px")
+                    .select("#value")
+                    .text(node.name + ' ' + node.id)
+                d3.select("#tooltip").classed("hidden", false)
+            })
+            .on('mouseout', _d => {
+                d3.select("#tooltip").classed("hidden", true)
+            })
+    });
+
 }
 
 /* Update Function When there are new Data
  *************************************************************/
 const update = (message) => {
     console.log(message)
-    if (message.id) 
+    if (message.id)
         updateCircle(node)
-    else (message.target)
-        updateLine(node)
+    else(message.target)
+    updateLine(node)
 }
 
 const updateCircle = (node) => {
@@ -174,7 +211,7 @@ const updateLine = (node) => {
     mapSvgContainer.select("line[source='" + node.source + "'][target='" + node.target + "']")
         .attr('class', 'connect ' + node.status + '-dimmable')
 }
- 
+
 /* Render Function When there are Network Data
  *************************************************************/
 const render = (network) => {
