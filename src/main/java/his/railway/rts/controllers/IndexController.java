@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import his.railway.rts.model.HttpResponceStatus;
 import his.railway.rts.model.JsonResponseBody;
+import his.railway.rts.service.ArduinoReadeWriteService;
 import his.railway.rts.service.RailwayService;
 
 @Controller
@@ -19,8 +20,8 @@ public class IndexController {
 	@Autowired
 	private RailwayService railwayService;
 	
-//	@Autowired
-//	private ArduinoReadeWriteService arduino;
+	@Autowired
+	private ArduinoReadeWriteService arduino;
 
 	@RequestMapping("/")
 	public String index(Map<String, Object> model) {
@@ -32,6 +33,12 @@ public class IndexController {
 	@SendTo("/railway/status")
 	public JsonResponseBody fetchStatus() {
 		JsonResponseBody response = new JsonResponseBody();
+		try {
+			arduino.writeMessage("thisismessage1");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
 		response.setResult(railwayService.getRailway());
 		response.setStatus(HttpResponceStatus.SUCCESS);
 		return response;

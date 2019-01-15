@@ -12,9 +12,11 @@ import his.railway.rts.reader.RailwayReader;
 public class RailwayService {
 
 	private Railway railway;
+	
+	RailwayReader reader;
 
 	public void load() throws IOException, URISyntaxException {
-		RailwayReader reader = new RailwayReader();
+		this.reader = new RailwayReader();
 		ClassLoader classLoader = getClass().getClassLoader();
 		railway = reader.read(classLoader.getResource("input/railway.json"));
 	}

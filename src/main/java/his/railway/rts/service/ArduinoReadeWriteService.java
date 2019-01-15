@@ -1,7 +1,6 @@
 package his.railway.rts.service;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Enumeration;
@@ -107,7 +106,7 @@ public class ArduinoReadeWriteService implements SerialPortEventListener {
 		}
 	}
 
-	public synchronized void writeMessage(String message) throws IOException {
+	public synchronized void writeMessage(String message) throws Exception {
 		output.write(message.getBytes());
 	}
 	
