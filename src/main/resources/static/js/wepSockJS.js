@@ -8,7 +8,10 @@ const connect = () => {
 	stompClient.connect({}, (frame) => {
 		console.log('Connected: ' + frame)
 		stompClient.subscribe('/railway/status', (messageOutput) => {
-			update(JSON.parse(messageOutput.body))
+			const massage = JSON.parse(messageOutput.body)
+			//console.log(massage)
+			if(massage.status === "SUCCESS") 
+				update(JSON.parse(massage.result))
 		})
 	})
 }
