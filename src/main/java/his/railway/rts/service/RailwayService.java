@@ -2,11 +2,10 @@ package his.railway.rts.service;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.Random;
 
+import his.railway.rts.model.Node;
 import his.railway.rts.model.Railway;
 import his.railway.rts.model.Track;
-import his.railway.rts.model.TrackStatus;
 import his.railway.rts.reader.RailwayReader;
 
 public class RailwayService {
@@ -25,27 +24,17 @@ public class RailwayService {
 		return railway;
 	}
 
-	public Track changeRandomLineState() {
-		int size = this.railway.getLinks().size();
-		int item = new Random().nextInt(size);
-		int i = 0;
-		for (Track track : this.railway.getLinks()) {
-			if (i == item) {
-				// System.out.println(" The Random chosen Track is : " + track);
-				track.setStatus(TrackStatus.randomTrackStatus());
-				this.saveTrack(track);
-				return track;
-			}
-			i++;
-		}
+	public Node interStation(int train,int station, int direction) {
 		return null;
 	}
 
-	private void saveTrack(Track track) {
-		if (!this.railway.getLinks().add(track)) {
-			this.railway.getLinks().remove(track);
-			this.railway.getLinks().add(track);
-		}
+	public Track interLine(int train, int from, int to, int direction) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Node changeSwitch(int train, int witch, int direction) {
+		return null;
 	}
 
 }
