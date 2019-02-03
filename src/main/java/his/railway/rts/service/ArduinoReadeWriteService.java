@@ -4,11 +4,15 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Enumeration;
+
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
-import his.railway.rts.listener.ArduinoReaderListener;
+import his.railway.rts.model.HttpResponceStatus;
+import his.railway.rts.model.JsonResponseBody;
 
 public class ArduinoReadeWriteService implements SerialPortEventListener {
 
@@ -37,10 +41,10 @@ public class ArduinoReadeWriteService implements SerialPortEventListener {
 
 	private SerialPort serialPort;
 
-	private ArduinoReaderListener serialPortEventListener;
+	private SimpMessagingTemplate template;
 
-	public ArduinoReadeWriteService(ArduinoReaderListener serialPortEventListener) {
-		this.serialPortEventListener = serialPortEventListener;
+	public ArduinoReadeWriteService(SimpMessagingTemplate template) {
+		this.template = template;
 	}
 
 	public void initialize() {
@@ -114,17 +118,27 @@ public class ArduinoReadeWriteService implements SerialPortEventListener {
 	 * Handle an event on the serial port. Read the data and print it.
 	 */
 	public synchronized void serialEvent(SerialPortEvent event) {
-
 		if (event.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {
 				String inputLine = input.readLine();
-				System.out.println(inputLine);
-				this.serialPortEventListener.send(inputLine);
+				//System.out.println(inputLine);
+				this.send(inputLine);
 			} catch (Exception e) {
 				System.err.println(e.toString());
 			}
 		}
 		// Ignore all the other eventTypes, but you should consider the other ones.
+	}
+	
+	private void send(String message)  {
+		// this switch to handle the event
+		message = message.replace("'", "\"");
+		
+		JsonResponseBody response = new JsonResponseBody();
+		System.out.println(message);
+		response.setResult(message);
+		response.setStatus(HttpResponceStatus.SUCCESS);
+		template.convertAndSend("/railway/status", response);
 	}
 
 }

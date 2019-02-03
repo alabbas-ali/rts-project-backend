@@ -25,6 +25,7 @@ public class IndexController {
 
 	@RequestMapping("/")
 	public String index(Map<String, Object> model) {
+		arduino.close();
 		return "index";
 	}
 
@@ -33,12 +34,7 @@ public class IndexController {
 	@SendTo("/railway/status")
 	public JsonResponseBody fetchStatus() {
 		JsonResponseBody response = new JsonResponseBody();
-		try {
-			arduino.writeMessage("thisismessage1");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.out.println(e.getMessage());
-		}
+		arduino.initialize();
 		response.setResult(railwayService.getRailway());
 		response.setStatus(HttpResponceStatus.SUCCESS);
 		return response;

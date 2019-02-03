@@ -13,7 +13,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.EnableAsync;
 
-import his.railway.rts.listener.ArduinoReaderListener;
 import his.railway.rts.service.ArduinoReadeWriteService;
 import his.railway.rts.service.RailwayService;
 
@@ -35,7 +34,7 @@ public class WebApplication extends SpringBootServletInitializer {
 
 	@Bean
 	@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
-	public RailwayService getAccountService() {
+	public RailwayService getRailwayService() {
 		RailwayService railwayService = new RailwayService();
 		try {
 			railwayService.load();
@@ -48,13 +47,8 @@ public class WebApplication extends SpringBootServletInitializer {
 	
 	@Bean
 	@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
-	public ArduinoReadeWriteService getArduinoReadeWriteService(
-		RailwayService railwayService,
-		SimpMessagingTemplate template	
-	) {
-		ArduinoReaderListener listener = new ArduinoReaderListener(railwayService, template);
-		ArduinoReadeWriteService arduino = new ArduinoReadeWriteService(listener);
-		arduino.initialize();
+	public ArduinoReadeWriteService getArduinoReadeWriteService(SimpMessagingTemplate template) {
+		ArduinoReadeWriteService arduino = new ArduinoReadeWriteService(template);
 		return arduino;
 	}
 
