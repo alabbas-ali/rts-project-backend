@@ -133,6 +133,19 @@ const renderMap = (mapSvgContainer, network) => {
             .attr('y', (node.y - 0.2) * ZUME)
             .attr("width", 15)
             .attr("height", 28)
+            .on('mouseover', d => {	
+                const xPosition = parseFloat(node.x * ZUME)	
+                const yPosition = parseFloat(node.y * ZUME + 80)	
+                d3.select("#tooltip")	
+                    .style("left", xPosition + "px")	
+                    .style("top", yPosition + "px")	
+                    .select("#value")	
+                    .html('<label>Type : </label>'+ node.type + '</br> <label>Name: </label>' + node.name + '</br> <label>ID : </label>' + node.id)	
+                d3.select("#tooltip").classed("hidden", false)	
+            })	
+            .on('mouseout', _d => {	
+                d3.select("#tooltip").classed("hidden", true)	
+            })
         else
             mapSvgContainer.append('circle')
             .attr('class', ' middle ' + node.type + '-node ' + node.status)
@@ -140,6 +153,19 @@ const renderMap = (mapSvgContainer, network) => {
             .attr('cx', node.x * ZUME)
             .attr('cy', node.y * ZUME)
             .attr('r', TYPES_RADIUS[node.type])
+            .on('mouseover', d => {	
+                const xPosition = parseFloat(node.x * ZUME)	
+                const yPosition = parseFloat(node.y * ZUME + 80)	
+                d3.select("#tooltip")	
+                    .style("left", xPosition + "px")	
+                    .style("top", yPosition + "px")	
+                    .select("#value")	
+                    .html('<label>Type : </label>'+ node.type + '</br> <label>Name: </label>' + node.name + '</br> <label>ID : </label>' + node.id)	
+                d3.select("#tooltip").classed("hidden", false)	
+            })	
+            .on('mouseout', _d => {	
+                d3.select("#tooltip").classed("hidden", true)	
+            })
     });
 
 }
