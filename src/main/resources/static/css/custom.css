@@ -17,19 +17,24 @@
   background: url('../img/boxed-bg.jpg') repeat fixed;
 }
 
+.train-label {
+    stroke-width: .4px;
+    stroke: #0f0748;
+    -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+    -mox-box-shadow: 0px 0px 0px 5px rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 0px 5px rbga(0, 0, 0, 0.4);
+    font-size: 11px;
+}
 
-#tooltip {
+.label {
   position: absolute;
   pointer-events: none;
-  font-size: 0.7em;
+  font-size: 8px;
   font-family: sans-serif;
   padding: 3px;
   width: auto;
   height: auto;
   background-color: #F2F2F2;
-  -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
-  -mox-box-shadow: 0px 0px 0px 5px rgba(0, 0, 0, 0.4);
-  box-shadow: 0px 0px 5px rbga(0, 0, 0, 0.4);
   pointer-events: none;
 }
 
@@ -66,3 +71,38 @@
   stroke-width: 1.5px;
   stroke: #5cb85c
 }
+
+.middle.STASTION-node.GREEN {
+  fill: rgb(144, 135, 255);
+  stroke: rgb(139, 130, 246);
+}
+
+.middle.STASTION-node.ORANGE {
+  fill: rgb(242, 179, 19);
+  stroke: rgb(242, 179, 19);
+}
+
+.middle.STASTION-node.RED {
+  fill: rgb(214, 48, 40);
+  stroke: rgb(214, 48, 40);
+}
+
+.middle.CONNECTION_GATE-node.GREEN{
+  fill: rgb(217, 95, 2);
+  stroke: rgb(217, 95, 2);
+}
+
+.middle.GATE-node.GREEN{
+  fill: rgb(206, 190, 16);
+  stroke: rgb(206, 190, 16);
+}
+
+.middle.GATE-node.RED{
+  fill: rgb(132, 1, 121);
+  stroke: rgb(132, 1, 121);
+}
+    /* TYPE_COLORS = ["#87e5c9", "#d95f02", "#9087ff"],
+    TYPE_HIGHLIGHT_COLORS = ["#1c225b", "#fc8d62", "#f9f21d"],
+    LINK_COLOR = "#b3b3b3",
+    INFLOW_COLOR = "#00223f",
+    OUTFLOW_COLOR = "#D63028", */

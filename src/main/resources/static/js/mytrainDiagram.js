@@ -231,8 +231,10 @@ const interLine = (message) => {
             el.direction === message.direction &&
             el.status === LINK_STATUS.RED
         )
-        previousLink.status = LINK_STATUS.GREEN
-        updateLine(previousLink)
+        if (previousLink) {
+            previousLink.status = LINK_STATUS.GREEN
+            updateLine(previousLink)
+        }
     }else if(link.source.type === 'CONNECTION_GATE'){
         let previousLink = network.links.find(
             el => el.target.nodeID === message.from
