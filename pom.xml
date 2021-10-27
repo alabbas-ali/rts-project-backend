@@ -21,7 +21,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>11</java.version>
-        <bootstrap.version>5.1.2</bootstrap.version>
+        <bootstrap.version>3.3.7</bootstrap.version>
     </properties>
 
     <dependencies>
@@ -84,7 +84,7 @@
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>font-awesome</artifactId>
-			<version>5.15.4</version>
+			<version>4.1.0</version>
 		</dependency>
 
         <!-- https://mvnrepository.com/artifact/org.rxtx/rxtx -->
