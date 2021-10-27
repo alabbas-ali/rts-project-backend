@@ -110,6 +110,11 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <addResources>true</addResources>
+                    
+                    <jvmArguments>
+                        -Djava.library.path=./lib
+                    </jvmArguments>
+                    
                 </configuration>
             </plugin>
 
