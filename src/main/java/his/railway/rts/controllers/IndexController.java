@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import his.railway.rts.model.HttpResponceStatus;
 import his.railway.rts.model.JsonResponseBody;
-import his.railway.rts.service.ArduinoReadeWriteService;
+import his.railway.rts.service.USBPortReadeWriteService;
 import his.railway.rts.service.RailwayService;
 
 @Controller
@@ -21,7 +21,7 @@ public class IndexController {
 	private RailwayService railwayService;
 	
 	@Autowired
-	private ArduinoReadeWriteService arduino;
+	private USBPortReadeWriteService arduino;
 
 	@RequestMapping("/")
 	public String index(Map<String, Object> model) {

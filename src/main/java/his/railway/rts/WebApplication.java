@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.web.support.SpringBootServletInitializer;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.EnableAsync;
 
-import his.railway.rts.service.ArduinoReadeWriteService;
+import his.railway.rts.service.USBPortReadeWriteService;
 import his.railway.rts.service.RailwayService;
 
 @SpringBootApplication
@@ -47,8 +47,8 @@ public class WebApplication extends SpringBootServletInitializer {
 	
 	@Bean
 	@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
-	public ArduinoReadeWriteService getArduinoReadeWriteService(SimpMessagingTemplate template) {
-		ArduinoReadeWriteService arduino = new ArduinoReadeWriteService(template);
+	public USBPortReadeWriteService getUSBPortReadeWriteService(SimpMessagingTemplate template) {
+		USBPortReadeWriteService arduino = new USBPortReadeWriteService(template);
 		return arduino;
 	}
 

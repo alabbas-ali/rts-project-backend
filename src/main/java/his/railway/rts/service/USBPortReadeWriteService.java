@@ -14,7 +14,7 @@ import gnu.io.SerialPortEventListener;
 import his.railway.rts.model.HttpResponceStatus;
 import his.railway.rts.model.JsonResponseBody;
 
-public class ArduinoReadeWriteService implements SerialPortEventListener {
+public class USBPortReadeWriteService implements SerialPortEventListener {
 
 	/** The port we're normally going to use. */
 	private static final String PORT_NAMES[] = { //
@@ -43,7 +43,7 @@ public class ArduinoReadeWriteService implements SerialPortEventListener {
 
 	private SimpMessagingTemplate template;
 
-	public ArduinoReadeWriteService(SimpMessagingTemplate template) {
+	public USBPortReadeWriteService(SimpMessagingTemplate template) {
 		this.template = template;
 	}
 
