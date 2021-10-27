@@ -26,6 +26,7 @@ public class IndexController {
 	@RequestMapping("/")
 	public String index(Map<String, Object> model) {
 		arduino.close();
+		System.out.println(" This is me called  \n");
 		return "index";
 	}
 

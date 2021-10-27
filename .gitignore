@@ -64,3 +64,5 @@ testem.log
 Thumbs.db
 *.iml
 ui-src/
+
+.vscode

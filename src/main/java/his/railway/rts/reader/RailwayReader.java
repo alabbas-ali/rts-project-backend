@@ -22,7 +22,7 @@ public class RailwayReader {
 		//convert json string to object
 		Railway reailway = objectMapper.readValue(jsonData, Railway.class);
 		
-		System.out.println("Reailway Object\n" + reailway);
+		//System.out.println("Reailway Object\n" + reailway);
 		
 		return reailway;
 	}
